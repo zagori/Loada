@@ -1,5 +1,6 @@
 package com.zagori.loada.network;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
@@ -22,7 +23,7 @@ import org.json.JSONArray;
  * This class encapsulates the RequestQueue (and the other Volley functionality)
  *
  * */
-public class RequestHandler {
+public class RequestHandler extends Application {
 
     private static final String TAG = RequestHandler.class.getSimpleName();
 
@@ -56,6 +57,13 @@ public class RequestHandler {
             requestQueue = Volley.newRequestQueue(context.getApplicationContext());
         }
         return requestQueue;
+    }
+
+    /*
+    * Cancel a single request using its url to identify it
+    * */
+    public void cancelRequest(String tag){
+        requestQueue.cancelAll(tag);
     }
 
     /*

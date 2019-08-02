@@ -12,6 +12,7 @@ import com.zagori.loada.interfaces.JsonArrayListener;
 import com.zagori.loada.models.DataSource;
 import com.zagori.loada.models.MemoryDataSource;
 import com.zagori.loada.models.NetworkDataSource;
+import com.zagori.loada.network.RequestHandler;
 
 import org.json.JSONArray;
 
@@ -34,6 +35,15 @@ public class Loada {
     private Loada(Context context) {
         this.context = context;
         this.dataSource = new DataSource(new MemoryDataSource(), new NetworkDataSource());
+    }
+
+    /*
+    * This method allows to cancel a pending request
+    *
+    * @param url is the URL of the data
+    * */
+    public void cancelDownloadRequest(String url){
+        RequestHandler.getInstance(context).cancelRequest(url);
     }
 
     /*
